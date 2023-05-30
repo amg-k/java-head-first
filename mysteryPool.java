@@ -9,7 +9,7 @@ class mysteryPool {
         System.out.print(" ");
       }
       System.out.print("n");
-      if (X > 1) {
+      if (x > 1) {
         System.out.print("tyczny");
         x = x + 2;
       }
