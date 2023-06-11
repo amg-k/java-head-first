@@ -1,3 +1,4 @@
+
 public class SimpleShipTester {
 	public static void main(String[] args) {
 		SimpleShip testShip = new SimpleShip();
