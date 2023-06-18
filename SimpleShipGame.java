@@ -1,7 +1,7 @@
 public class SimpleShipGame {
     public static void main(String[] args) {
         int moveCount = 0;
-        GameHelper helper = new GameHelper();
+        SimpleGameHelper helper = new SimpleGameHelper();
         SimpleShip gameSimpleShip = new SimpleShip();
         int crdStart = (int) (Math.random() * 5);
         int[] inCrdShipList = {crdStart, crdStart + 1, crdStart + 2};
