@@ -2,13 +2,16 @@ import java.util.ArrayList;
 
 public class ArrayTypeTester {
     public static void main(String[] args) {
-        ArrayList<Animal> animalList = new ArrayList<Animal>();
+        ArrayList<Object> animalList = new ArrayList<Object>();
         Cat c = new Cat();
         Dog d = new Dog();
         animalList.add(c);
         animalList.add(d);
 
-        //animalList[1].catVoice();
+        Cat aniCat = (Cat) animalList.get(0);
+        aniCat.setWeight(7);
+        System.out.println(aniCat.weight);
+        aniCat.voice();
     }
 }
 
@@ -22,16 +25,20 @@ class Animal {
             System.out.println("Wrong value");
         }
     }
+
+    public void voice() {
+        System.out.println("-general-animal-voice-");
+    }
 }
 
 class Cat extends Animal {
-    public void catVoice() {
+    public void voice() {
         System.out.println("Miauu");
     }
 }
 
 class Dog extends Animal {
-    public void dogVoice() {
+    public void voice() {
         System.out.println("Hauu");
     }
 }
