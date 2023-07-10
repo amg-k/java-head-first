@@ -17,6 +17,10 @@ public class MusicMachine {
         //System.out.println(songV2List.get(0));
         Collections.sort(songV2List);
         System.out.println(songV2List);
+
+        ArtistComparator atristCmpr = new ArtistComparator();
+        songV2List.sort(atristCmpr);
+        System.out.println(songV2List);
     }
 }
 
@@ -73,5 +77,11 @@ class MockSong {
         songs.add(new SongV2("Paganini Variations", "Rachmaninov", 168));
         songs.add(new SongV2("2nd Piano Concerto", "Beethoven", 554));
         return songs;
+    }
+}
+
+class ArtistComparator implements Comparator<SongV2> {
+    public int compare(SongV2 first, SongV2 second) {
+        return first.getArtist().compareTo(second.getArtist());
     }
 }
