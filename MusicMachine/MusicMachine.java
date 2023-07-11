@@ -7,15 +7,19 @@ public class MusicMachine {
         new MusicMachine().doIt();
     }
     public void doIt() {
-        List<String> songList = MockSong.getSongs();
+/*         List<String> songList = MockSong.getSongs();
         System.out.println(songList);
         Collections.sort(songList);
-        System.out.println(songList);
+        System.out.println(songList); */
 
         List<SongV2> songV2List = MockSong.getSongsV2();
-        System.out.println(songV2List);
+/*         System.out.println(songV2List);
         //System.out.println(songV2List.get(0));
         Collections.sort(songV2List);
+        System.out.println(songV2List); */
+
+        TitleComparator titleCmpr = new TitleComparator();
+        songV2List.sort(titleCmpr);
         System.out.println(songV2List);
 
         ArtistComparator atristCmpr = new ArtistComparator();
@@ -77,6 +81,12 @@ class MockSong {
         songs.add(new SongV2("Paganini Variations", "Rachmaninov", 168));
         songs.add(new SongV2("2nd Piano Concerto", "Beethoven", 554));
         return songs;
+    }
+}
+
+class TitleComparator implements Comparator<SongV2> {
+    public int compare(SongV2 first, SongV2 second) {
+        return first.getTitle().compareTo(second.getTitle());
     }
 }
 
