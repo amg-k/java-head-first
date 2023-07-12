@@ -22,11 +22,17 @@ public class MusicMachine {
         songV2List.sort((first, second) -> first.getTitle().compareTo(second.getTitle()));
         System.out.println(songV2List);
 
+/*         songV2List.sort((first, second) -> -(first.getTitle().compareTo(second.getTitle())));
+        System.out.println(songV2List); */
+        
+        songV2List.sort((first, second) -> second.getTitle().compareTo(first.getTitle()));
+        System.out.println(songV2List);
+
         //ArtistComparator atristCmpr = new ArtistComparator();
         songV2List.sort((first, second) -> first.getArtist().compareTo(second.getArtist()));
         System.out.println(songV2List);
 
-        songV2List.sort((first, second) -> first.getLenght().compareTo(second.getLenght()));
+        songV2List.sort((first, second) -> first.getLenght() - second.getLenght());
         System.out.println(songV2List);
     }
 }
@@ -51,7 +57,7 @@ class SongV2 implements Comparable<SongV2> {
     public String getArtist() {
         return artist;
     }
-    public Integer getLenght() {
+    public int getLenght() {
         return lenght;
     }
     public String toString() {
