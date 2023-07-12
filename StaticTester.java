@@ -26,6 +26,8 @@ public class StaticTester extends StaticSuper {
     public static void main(String[] args) {
         System.out.println("Main method");
         StaticTester st = new StaticTester();
+        System.out.println(st);
         StaticTester stNew = new StaticTester();
+        System.out.println(stNew);
     }
 }
