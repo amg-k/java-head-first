@@ -7,28 +7,15 @@ public class MusicMachine {
         new MusicMachine().doIt();
     }
     public void doIt() {
-/*         List<String> songList = MockSong.getSongs();
-        System.out.println(songList);
-        Collections.sort(songList);
-        System.out.println(songList); */
-
         List<SongV2> songV2List = MockSong.getSongsV2();
-/*      System.out.println(songV2List);
-        //System.out.println(songV2List.get(0));
-        Collections.sort(songV2List); */
         System.out.println(songV2List);
 
-        //TitleComparator titleCmpr = new TitleComparator();
         songV2List.sort((first, second) -> first.getTitle().compareTo(second.getTitle()));
         System.out.println(songV2List);
 
-/*         songV2List.sort((first, second) -> -(first.getTitle().compareTo(second.getTitle())));
-        System.out.println(songV2List); */
-        
         songV2List.sort((first, second) -> second.getTitle().compareTo(first.getTitle()));
         System.out.println(songV2List);
 
-        //ArtistComparator atristCmpr = new ArtistComparator();
         songV2List.sort((first, second) -> first.getArtist().compareTo(second.getArtist()));
         System.out.println(songV2List);
 
@@ -106,15 +93,3 @@ class MockSong {
         return songs;
     }
 }
-
-/* class TitleComparator implements Comparator<SongV2> {
-    public int compare(SongV2 first, SongV2 second) {
-        return first.getTitle().compareTo(second.getTitle());
-    }
-}
-
-class ArtistComparator implements Comparator<SongV2> {
-    public int compare(SongV2 first, SongV2 second) {
-        return first.getArtist().compareTo(second.getArtist());
-    }
-} */
