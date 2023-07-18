@@ -36,6 +36,6 @@ public class SongAdv {
     }
 
     public String toString() {
-        return title;
+        return String.join(" - ", title, artist, genre);
     }
 }
