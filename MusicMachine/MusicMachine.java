@@ -9,7 +9,7 @@ public class MusicMachine {
         List<SongAdv> songAdvList = MusicMachineData.SongsAdv.getSongsAdv();
         //System.out.println(songAdvList);
 
-        List<SongAdv> rockSongs = songAdvList.stream().filter(song -> song.getGenre().equalsIgnoreCase("rock")).collect(Collectors.toList());
+        List<SongAdv> rockSongs = songAdvList.stream().filter(song -> song.getGenre().toLowerCase().contains("rock")).collect(Collectors.toList());
         System.out.println(rockSongs);
     }
     
