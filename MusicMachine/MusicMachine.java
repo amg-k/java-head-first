@@ -4,7 +4,9 @@ import java.util.*;
 
 public class MusicMachine {
     public static void main(String[] args) {
-        new MusicMachine().doIt();
+        //new MusicMachine().doIt();
+        List<SongAdv> songAdvList = MusicMachineData.SongsAdv.getSongsAdv();
+        System.out.println(songAdvList);
     }
     public void doIt() {
         List<SongV2> songV2List = MockSong.getSongsV2();
