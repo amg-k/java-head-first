@@ -1,13 +1,18 @@
 package MusicMachine;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class MusicMachine {
     public static void main(String[] args) {
         //new MusicMachine().doIt();
         List<SongAdv> songAdvList = MusicMachineData.SongsAdv.getSongsAdv();
-        System.out.println(songAdvList);
+        //System.out.println(songAdvList);
+
+        List<SongAdv> rockSongs = songAdvList.stream().filter(song -> song.getGenre().equalsIgnoreCase("rock")).collect(Collectors.toList());
+        System.out.println(rockSongs);
     }
+    
     public void doIt() {
         List<SongV2> songV2List = MockSong.getSongsV2();
         System.out.println(songV2List);
