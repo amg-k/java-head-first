@@ -19,7 +19,7 @@ public class SongAdv {
         return title;
     }
 
-    public String getArtis() {
+    public String getArtist() {
         return artist;
     }
 
