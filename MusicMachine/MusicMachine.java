@@ -15,13 +15,24 @@ public class MusicMachine {
         //List<SongAdv> beatlesSongs = songAdvList.stream().filter(s -> s.getArtis().equalsIgnoreCase("The Beatles")).collect(Collectors.toList());
         //System.out.println("The Beatles songs: " + beatlesSongs);
 
-        List<String> startsWithH = songAdvList.stream().filter(song -> song.getTitle().toLowerCase().startsWith("h")).map(s -> s.getTitle() + " - " + s.getArtis()).collect(Collectors.toList());
+        List<String> startsWithH = songAdvList.stream()
+                                                .filter(song -> song
+                                                .getTitle().toLowerCase()
+                                                .startsWith("h"))
+                                                .map(s -> String.join(" - ", s.getTitle(), s.getArtist()))
+                                                .collect(Collectors.toList());
         System.out.println("Songs starts with \"H\": " + startsWithH);
 
-        List<String> after1995songs = songAdvList.stream().filter(s -> s.getYear() > 1995).map(s -> s.getTitle()).collect(Collectors.toList());
+        List<String> after1995songs = songAdvList.stream()
+                                                .filter(s -> s.getYear() > 1995)
+                                                .map(s -> s.getTitle())
+                                                .collect(Collectors.toList());
         System.out.println("Songs released after 1995: " + after1995songs);
 
-        List<String> songsGneres = songAdvList.stream().map(song -> song.getGenre()).distinct().collect(Collectors.toList());
+        List<String> songsGneres = songAdvList.stream()
+                                                .map(song -> song.getGenre())
+                                                .distinct()
+                                                .collect(Collectors.toList());
         System.out.println("Songs gneres: " + songsGneres);
     }
     
