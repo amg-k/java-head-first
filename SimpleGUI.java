@@ -1,16 +1,26 @@
 import javax.swing.*;
+import java.awt.event.*;
 
-public class SimpleGUI {
+public class SimpleGUI implements ActionListener {
+    private JButton button;
     public static void main(String[] args) {
+        SimpleGUI sGUI = new SimpleGUI();
+        sGUI.doIt();
+    }
+
+    public void doIt() {
         JFrame frame = new JFrame();
-        JButton button = new JButton("Click me!");
+        button = new JButton("Click me!");
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        button.addActionListener(this);
+        
         frame.getContentPane().add(button);
-
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 300);
-
         frame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent event) {
+        button.setText("I'm clicked!");
     }
 }
