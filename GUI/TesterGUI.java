@@ -1,9 +1,14 @@
 package GUI;
 
+import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 
-public class TesterGUI {
+public class TesterGUI implements ActionListener {
+    private JFrame myFrame;
     private MyGraphicPanel myPanel;
+    private JButton myButton;
 
     public static void main(String[] args) {
         TesterGUI myTester = new TesterGUI();
@@ -11,12 +16,20 @@ public class TesterGUI {
     }
 
     public void doIt() {
-        JFrame myFrame = new JFrame();
+        myFrame = new JFrame();
         myPanel = new MyGraphicPanel();
+        myButton = new JButton("New Color!");
 
-        myFrame.getContentPane().add(myPanel);
+        myButton.addActionListener(this);
+
+        myFrame.getContentPane().add(BorderLayout.CENTER, myPanel);
+        myFrame.getContentPane().add(BorderLayout.SOUTH, myButton);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.setSize(1500, 1000);
+        myFrame.setSize(600, 500);
         myFrame.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent myEvent) {
+        myFrame.repaint();
     }
 }
