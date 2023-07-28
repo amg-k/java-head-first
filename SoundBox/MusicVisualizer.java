@@ -13,8 +13,8 @@ public class MusicVisualizer {
             Track myTrack = mySequence.createTrack();
 
             for (int i = 50; i < 103; i += 4) {
-                myTrack.add(createEvent(NOTE_ON, 1, i, 100, i));
-                myTrack.add(createEvent(NOTE_OFF, 1, i, 100, i + 2));
+                myTrack.add(createEvent(NOTE_ON, 1, i, 100, i - 49));
+                myTrack.add(createEvent(NOTE_OFF, 1, i, 100, i - 47));
             }
             
             mySequencer.setSequence(mySequence);
