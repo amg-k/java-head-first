@@ -19,20 +19,19 @@ public class MusicVisualizer {
     }
 
     public void playSounds() {
+        createPanelFrame();
         try {
             Sequencer mySequencer = MidiSystem.getSequencer();
             mySequencer.open();
 
-            createPanelFrame();
-
-            int[] eventFlagNum = {127};
-            mySequencer.addControllerEventListener(myPanel, eventFlagNum);
+            mySequencer.addControllerEventListener(myPanel, new int[] {127});
 
             Sequence mySequence = new Sequence(Sequence.PPQ, 4);
             Track myTrack = mySequence.createTrack();
 
+            int note;
             for (int i = 1; i < 64; i += 4) {
-                int note = getRandomInt(21, 109);
+                note = getRandomInt(21, 109);
                 myTrack.add(createEvent(NOTE_ON, 1, note, 100, i));
                 myTrack.add(createEvent(CONTROL_CHANGE, 1, 127, 0, i));
                 myTrack.add(createEvent(NOTE_OFF, 1, note, 100, i + 2));
@@ -65,10 +64,10 @@ public class MusicVisualizer {
 
     public void createPanelFrame() {
         myPanel = new GraphicPanel();
-        myFrame = new JFrame();
+        myFrame = new JFrame("Music visualizer");
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.getContentPane().add(BorderLayout.CENTER, myPanel);
-        myFrame.setSize(600, 500);
+        myFrame.setContentPane(myPanel);
+        myFrame.setBounds(30, 30, 500, 500);
         myFrame.setVisible(true);
     }
 
@@ -87,8 +86,8 @@ public class MusicVisualizer {
                 int myHeight = getRandomInt(10, 120);
                 int myWidth = getRandomInt(10, 120);
 
-                int xValue = getRandomInt(10, 200);
-                int yValue = getRandomInt(10, 200);
+                int xValue = getRandomInt(20, 300);
+                int yValue = getRandomInt(20, 300);
 
                 g.fillRect(xValue, yValue, myWidth, myHeight);
                 myFlag = false;
