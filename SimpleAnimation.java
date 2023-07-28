@@ -33,12 +33,15 @@ public class SimpleAnimation {
             
             xValue += animationStep;
             yValue += animationStep;
-            myFrame.repaint();
+            myPanel.repaint();
         }
     }
     
     class AnimationPanel extends JPanel {
         public void paintComponent(Graphics g) {
+            g.setColor(Color.white);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            
             g.setColor(Color.green);
             g.fillOval(xValue, yValue, 100, 100);
         }
