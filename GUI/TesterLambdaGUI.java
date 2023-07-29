@@ -1,10 +1,9 @@
 package GUI;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
-public class TesterGUI {
+public class TesterLambdaGUI {
     private JFrame myFrame;
     private MyGraphicPanel myPanel;
     private JButton myButtonRect;
@@ -24,8 +23,8 @@ public class TesterGUI {
         myButtonLabel = new JButton("Change label!");
         myLabel = new JLabel("Lorem ipsum...");
 
-        myButtonRect.addActionListener(new RectListener());
-        myButtonLabel.addActionListener(new LabelListener());
+        myButtonRect.addActionListener(event -> myFrame.repaint());
+        myButtonLabel.addActionListener(event -> myLabel.setText("...dolor sit amet..."));
 
         myFrame.getContentPane().add(BorderLayout.CENTER, myPanel);
         myFrame.getContentPane().add(BorderLayout.SOUTH, myButtonRect);
@@ -34,17 +33,5 @@ public class TesterGUI {
         
         myFrame.setSize(600, 500);
         myFrame.setVisible(true);
-    }
-
-    class RectListener implements ActionListener {
-        public void actionPerformed(ActionEvent myEvent) {
-            myFrame.repaint();
-        }    
-    }
-
-    class LabelListener implements ActionListener {
-        public void actionPerformed(ActionEvent myEvent) {
-            myLabel.setText("...dolor sit amet...");
-        }    
     }
 }
