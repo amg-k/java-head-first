@@ -1,4 +1,5 @@
 *.class
 *.jpg
 *.png
+*.ser
 .vscode/
