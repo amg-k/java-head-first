@@ -2,6 +2,7 @@ package MusicMachine;
 
 import java.util.ArrayList;
 import java.awt.*;
+import java.io.*;
 import javax.sound.midi.*;
 import javax.swing.*;
 
@@ -12,6 +13,7 @@ public class PianoGenerator {
     private Sequencer mySequencer;
     private Sequence mySequence;
     private Track myTrack;
+    private JFrame mainFrame;
 
     String[] notesNames = {"d''", "c''", "h'", "a'", "g'", "f'", "e'", "d'", "c'", 
                             "h", "a", "g", "f", "e", "d", "c"};
@@ -22,7 +24,7 @@ public class PianoGenerator {
     }
 
     public void createGUI() {
-        JFrame mainFrame = new JFrame("Piano Generator");
+        mainFrame = new JFrame("Piano Generator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout myLayout = new BorderLayout();
         JPanel myPanelSide = new JPanel(myLayout);
@@ -45,6 +47,14 @@ public class PianoGenerator {
         JButton slower = new JButton("Slower");
         slower.addActionListener(ev -> changeSpeed(0.97f));
         buttonArea.add(slower);
+
+        JButton save = new JButton("Save");
+        save.addActionListener(ev -> saveSong());
+        buttonArea.add(save);
+
+        JButton load = new JButton("Load");
+        load.addActionListener(ev -> loadSong());
+        buttonArea.add(load);
 
         Box nameArea = new Box(BoxLayout.Y_AXIS);
         for (String note : notesNames) {
@@ -153,5 +163,43 @@ public class PianoGenerator {
             ex.printStackTrace();
         }
         return myEvent;
+    }
+
+    private void saveSong() {
+        boolean[] boxStates = new boolean[256];
+        JFileChooser dialogFileChooser = new JFileChooser();
+        
+        for (int i = 0; i < 256; i++) {
+            JCheckBox checkBox = checkBoxList.get(i);
+            if (checkBox.isSelected()) {
+                boxStates[i] = true;
+            }
+        }
+
+        dialogFileChooser.showSaveDialog(mainFrame);
+        try (ObjectOutputStream os = 
+                new ObjectOutputStream(new FileOutputStream(dialogFileChooser.getSelectedFile()))) {
+            os.writeObject(boxStates);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void loadSong() {
+        boolean[] boxStates = null;
+        JFileChooser dialogFileChooser = new JFileChooser();
+
+        dialogFileChooser.showOpenDialog(mainFrame);
+        try (ObjectInputStream is = 
+                new ObjectInputStream(new FileInputStream(dialogFileChooser.getSelectedFile()))) {
+            boxStates = (boolean[]) is.readObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        for (int i = 0; i < 256; i++) {
+            JCheckBox checkBox = checkBoxList.get(i);
+            checkBox.setSelected(boxStates[i]);
+        }
     }
 }
