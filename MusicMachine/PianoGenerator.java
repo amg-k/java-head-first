@@ -56,6 +56,10 @@ public class PianoGenerator {
         load.addActionListener(ev -> loadSong());
         buttonArea.add(load);
 
+        JButton clear = new JButton("Clear all");
+        clear.addActionListener(ev -> clearAll());
+        buttonArea.add(clear);
+
         Box nameArea = new Box(BoxLayout.Y_AXIS);
         for (String note : notesNames) {
             JLabel noteLabel = new JLabel(note);
@@ -200,6 +204,12 @@ public class PianoGenerator {
         for (int i = 0; i < 256; i++) {
             JCheckBox checkBox = checkBoxList.get(i);
             checkBox.setSelected(boxStates[i]);
+        }
+    }
+
+    private void clearAll() {
+        for (int i = 0; i < 256; i++) {
+            checkBoxList.get(i).setSelected(false);
         }
     }
 }
