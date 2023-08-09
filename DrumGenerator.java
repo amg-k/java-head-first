@@ -103,7 +103,7 @@ public class DrumGenerator {
             int key = drumNumbers[i];
 
             for (int j = 0; j < 16; j++) {
-                JCheckBox jc = checkBoxList.get(j + 16 * 1);
+                JCheckBox jc = checkBoxList.get(j + 16 * i);
                 if (jc.isSelected()) {
                     trackList[j] = key;
                 } else {
