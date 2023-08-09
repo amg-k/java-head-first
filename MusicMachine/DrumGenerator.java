@@ -1,3 +1,5 @@
+package MusicMachine;
+
 import java.util.ArrayList;
 import java.awt.*;
 import javax.sound.midi.*;
@@ -5,22 +7,23 @@ import javax.swing.*;
 
 import static javax.sound.midi.ShortMessage.*;
 
-public class PianoGenerator {
+public class DrumGenerator {
     private ArrayList<JCheckBox> checkBoxList;
     private Sequencer mySequencer;
     private Sequence mySequence;
     private Track myTrack;
 
-    String[] notesNames = {"d''", "c''", "h'", "a'", "g'", "f'", "e'", "d'", "c'", 
-                            "h", "a", "g", "f", "e", "d", "c"};
-    int[] notesNumbers = {74, 72, 71, 69, 67, 65, 64, 62, 60, 59, 57, 55, 53, 52, 50, 48};
+    String[] drumNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal",
+                            "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", 
+                            "Cowbell", "Vibraslap", "Low-mid Tom", "High Agogo", "Open Hi Conga"};
+    int[] drumNumbers = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
 
     public static void main(String[] args) {
-        new PianoGenerator().createGUI();
+        new DrumGenerator().createGUI();
     }
 
     public void createGUI() {
-        JFrame mainFrame = new JFrame("Piano Generator");
+        JFrame mainFrame = new JFrame("Drum Generator");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout myLayout = new BorderLayout();
         JPanel myPanelSide = new JPanel(myLayout);
@@ -45,10 +48,10 @@ public class PianoGenerator {
         buttonArea.add(slower);
 
         Box nameArea = new Box(BoxLayout.Y_AXIS);
-        for (String note : notesNames) {
-            JLabel noteLabel = new JLabel(note);
-            noteLabel.setBorder(BorderFactory.createEmptyBorder(4, 1, 4, 1));
-            nameArea.add(noteLabel);
+        for (String drumName : drumNames) {
+            JLabel drumLabel = new JLabel(drumName);
+            drumLabel.setBorder(BorderFactory.createEmptyBorder(4, 1, 4, 1));
+            nameArea.add(drumLabel);
         }
 
         myPanelSide.add(BorderLayout.EAST, buttonArea);
@@ -99,7 +102,7 @@ public class PianoGenerator {
         for (int i = 0; i < 16; i++) {
             trackList = new int[16];
 
-            int key = notesNumbers[i];
+            int key = drumNumbers[i];
 
             for (int j = 0; j < 16; j++) {
                 JCheckBox jc = checkBoxList.get(j + 16 * i);
@@ -113,7 +116,7 @@ public class PianoGenerator {
             myTrack.add(createEvent(CONTROL_CHANGE, 1, 127, 0, 16));
         }
 
-        myTrack.add(createEvent(PROGRAM_CHANGE, 1, 1, 0, 15));
+        myTrack.add(createEvent(PROGRAM_CHANGE, 9, 1, 0, 15));
 
         try {
             mySequencer.setSequence(mySequence);
@@ -135,8 +138,8 @@ public class PianoGenerator {
             int key = list[i];
 
             if (key != 0) {
-                myTrack.add(createEvent(NOTE_ON, 1, key, 100, i));
-                myTrack.add(createEvent(NOTE_OFF, 1, key, 100, i + 1));
+                myTrack.add(createEvent(NOTE_ON, 9, key, 100, i));
+                myTrack.add(createEvent(NOTE_OFF, 9, key, 100, i + 1));
             }
         }
     }
