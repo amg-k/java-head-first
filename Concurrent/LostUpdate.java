@@ -1,6 +1,7 @@
 package Concurrent;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LostUpdate {
     public static void main(String[] args) throws InterruptedException {
@@ -18,9 +19,11 @@ public class LostUpdate {
 }
 
 class AccountBalance {
-    int balance = 0;
+    //int balance = 0;
+    AtomicInteger balance = new AtomicInteger(0);
 
     public synchronized void increment() {
-        balance++;
+        //balance++;
+        balance.incrementAndGet();
     }
 }
