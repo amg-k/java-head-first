@@ -4,7 +4,8 @@ import java.util.concurrent.*;
 
 public class SynchronizedAccountWithdraw {
     public static void main (String[] args) {
-        BankAccountSynchronized account = new BankAccountSynchronized();
+        //BankAccountSynchronized account = new BankAccountSynchronized();
+        AtomicAccount account = new AtomicAccount();
         UsersSynchronized robert = new UsersSynchronized("Robert", account, 50);
         UsersSynchronized monika = new UsersSynchronized("Monika", account, 100);
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -16,9 +17,11 @@ public class SynchronizedAccountWithdraw {
 
 class UsersSynchronized implements Runnable {
     private final String name;
-    private final BankAccountSynchronized account;
+    //private final BankAccountSynchronized account;
+    private final AtomicAccount account;
     private final int amountToSpend;
-    UsersSynchronized(String name, BankAccountSynchronized account, int amountToSpend) {
+    //UsersSynchronized(String name, BankAccountSynchronized account, int amountToSpend) {
+    UsersSynchronized(String name, AtomicAccount account, int amountToSpend) {
         this.name = name;
         this.account = account;
         this.amountToSpend = amountToSpend;
