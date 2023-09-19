@@ -1,15 +1,14 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.*;
 
 public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(CodeRepository.twoStringsOrder("lorem ipsum", "dolor sit amet"));
+        System.out.println(Arrays.toString(CodeRepository.removeEveryOther(new Object[] { "Hello", "Goodbye", "Hello Again" })));
 
     }
     
@@ -82,7 +81,7 @@ public class CodeRepository {
         return strB.toString(); */
     }
 
-    /* PRZETWARZANIE KOLEKCJI */
+    /* PRZETWARZANIE KOLEKCJI, TABLIC */
 
     //usunięcie z listy elementów nie będących typu Integer
     static List<Object> filterInteger(List<Object> list) {
@@ -92,5 +91,11 @@ public class CodeRepository {
     //kolekcja dwuelementowych tablic - operacja na elementach i podanie sumy
     static int sumArraysList(ArrayList<int[]> list) {
         return list.stream().mapToInt(e -> (e[0] - e[1])).sum();
+    }
+
+    //tablicę Object[] zredukować aby pozostały tylko co drugie elementy
+    //schemat działania - wyznaczyć co drugi indeks i za jego pomocą wskazać elementy do pozostawienia
+    static Object[] removeEveryOther(Object[] arr) {
+        return IntStream.range(0, arr.length).filter(n -> n % 2 == 0).mapToObj(x -> arr[x]).toArray();
     }
 }
