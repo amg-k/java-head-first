@@ -8,7 +8,7 @@ public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(Arrays.toString(CodeRepository.removeEveryOther(new Object[] { "Hello", "Goodbye", "Hello Again" })));
+        System.out.println(CodeRepository.sortDescending(1234123));
 
     }
     
@@ -79,6 +79,14 @@ public class CodeRepository {
                         .sorted()
                         .forEach(e -> strB.appendCodePoint(e));
         return strB.toString(); */
+    }
+
+    //użycie cyfr z przekazaniej liczby int tak aby stworzyć najwięszą możliwą liczbę int
+    //uszeregowanie w kolejności malejącej
+    static int sortDescending(int num) {
+        String[] strArr = String.valueOf(num).split("");
+        Arrays.sort(strArr, Collections.reverseOrder());
+        return Integer.parseInt(String.join("", strArr));
     }
 
     /* PRZETWARZANIE KOLEKCJI, TABLIC */
