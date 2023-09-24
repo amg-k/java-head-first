@@ -8,7 +8,7 @@ public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(CodeRepository.sortDescending(1234123));
+        System.out.println(CodeRepository.createPhoneNumber(new int[] {1, 3, 4, 2, 4, 5, 1, 5, 2, 1}));
 
     }
     
@@ -105,5 +105,11 @@ public class CodeRepository {
     //schemat działania - wyznaczyć co drugi indeks i za jego pomocą wskazać elementy do pozostawienia
     static Object[] removeEveryOther(Object[] arr) {
         return IntStream.range(0, arr.length).filter(n -> n % 2 == 0).mapToObj(x -> arr[x]).toArray();
+    }
+
+    //przedstawia tablicę 10 cyfr w formie numeru tel. jako łańcuch znaków
+    //jako drugi parametr metody .format podana jest Integer[] (opakowanie w Integr poprzez .boxed())
+    static String createPhoneNumber(int[] numbers) {
+        return String.format("(%d%d%d) %d%d%d-%d%d%d%d", Arrays.stream(numbers).boxed().toArray());
     }
 }
