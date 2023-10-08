@@ -8,7 +8,7 @@ public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(CodeRepository.createPhoneNumber(new int[] {1, 3, 4, 2, 4, 5, 1, 5, 2, 1}));
+        System.out.println(CodeRepository.isInteresting(12345, new int[] {1, 3, 4, 2, 4, 5, 1, 5, 2, 1}));
 
     }
     
@@ -111,5 +111,24 @@ public class CodeRepository {
     //jako drugi parametr metody .format podana jest Integer[] (opakowanie w Integr poprzez .boxed())
     static String createPhoneNumber(int[] numbers) {
         return String.format("(%d%d%d) %d%d%d-%d%d%d%d", Arrays.stream(numbers).boxed().toArray());
+    }
+    
+    //sprawdź czy liczba jest min 100 i jeśli tak czy spełania min jedno kryterium: (1) cyfra z samymi zerami, (2) taka sama czytając z lewej i z prawej
+    //(3) rosnąca ze skokiem o 1, (4) malejąca ze skokiem o 1, (5) jest równa któejś z liczb przekazanych w tablicy
+    static boolean checkCriteria(int number, int[] awesomePhrases) {
+        var strNum = String.valueOf(number);
+        if (!(number > 99)) return false;
+        return strNum.matches("\\d0+") ||
+               new StringBuilder(strNum).reverse().toString().equals(strNum) ||
+               "1234567890".contains(strNum) ||
+               "9876543210".contains(strNum) ||
+               IntStream.of(awesomePhrases).anyMatch(x -> x == number);
+    }
+
+    //zwraca inną wartość liczbową po spełnieniu kryteriów przez kolejne trzy liczby
+    static int isInteresting(int number, int[] awesomePhrases) {
+        return checkCriteria(number, awesomePhrases) ? 2 :
+               checkCriteria(number + 1, awesomePhrases) ? 1 :
+               checkCriteria(number + 2, awesomePhrases) ? 1 : 0;
     }
 }
