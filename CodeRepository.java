@@ -8,7 +8,7 @@ public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(CodeRepository.isInteresting(12345, new int[] {1, 3, 4, 2, 4, 5, 1, 5, 2, 1}));
+        System.out.println(CodeRepository.toRoman(1482));
 
     }
     
@@ -130,5 +130,63 @@ public class CodeRepository {
         return checkCriteria(number, awesomePhrases) ? 2 :
                checkCriteria(number + 1, awesomePhrases) ? 1 :
                checkCriteria(number + 2, awesomePhrases) ? 1 : 0;
+    }
+
+    //startWith zamiast replaceFirst - i wtedy stała w kolejności malejącej
+
+    //zmienia liczbę arabską na liczbę rzymską
+    static String toRoman(int n) {
+        var romanB = new StringBuilder();
+        var ROMAN_DECIMAL = new LinkedHashMap<String, Integer>() {{
+          put("M", 1000);
+          put("CM", 900);
+          put("D", 500);
+          put("CD", 400);
+          put("C", 100);
+          put("XC", 90);
+          put("L", 50);
+          put("XL", 40);
+          put("X", 10);
+          put("IX", 9);
+          put("V", 5);
+          put("IV", 4);
+          put("I", 1);
+        }};
+        
+        for (String key : ROMAN_DECIMAL.keySet()) {
+          while (n >= ROMAN_DECIMAL.get(key)) {
+            romanB.append(key);
+            n = n - ROMAN_DECIMAL.get(key);
+          }
+        }
+        return romanB.toString();
+    }
+    
+    //zmienia wartość liczby rzymskiej na liczbę arabską
+    static int fromRoman(String romanNumeral) {
+        int romanNum = 0;
+        var ROMAN_DECIMAL = new LinkedHashMap<String, Integer>() {{
+          put("CM", 900);
+          put("M", 1000);
+          put("CD", 400);
+          put("D", 500);
+          put("XC", 90);
+          put("C", 100);
+          put("XL", 40);
+          put("L", 50);
+          put("IX", 9);
+          put("X", 10);
+          put("IV", 4);
+          put("V", 5);
+          put("I", 1);
+        }};
+        
+        for (String key : ROMAN_DECIMAL.keySet()) {
+          while (romanNumeral.contains(key)) {
+            romanNumeral = romanNumeral.replaceFirst(key, "");
+            romanNum = romanNum + ROMAN_DECIMAL.get(key);
+          }
+        }    
+        return romanNum;
     }
 }
