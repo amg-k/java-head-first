@@ -8,7 +8,7 @@ public class CodeRepository {
     
     public static void main(String[] args) {
        
-        System.out.println(CodeRepository.toRoman(1482));
+        System.out.println(CodeRepository.toRoman(2025));
 
     }
     
@@ -132,12 +132,8 @@ public class CodeRepository {
                checkCriteria(number + 2, awesomePhrases) ? 1 : 0;
     }
 
-    //startWith zamiast replaceFirst - i wtedy stała w kolejności malejącej
-
-    //zmienia liczbę arabską na liczbę rzymską
-    static String toRoman(int n) {
-        var romanB = new StringBuilder();
-        var ROMAN_DECIMAL = new LinkedHashMap<String, Integer>() {{
+    //stała określająca warunki wzajemnego przeliczania liczb rzymskich i arabskich
+    public static final Map<String, Integer> ROMAN_DECIMAL = new LinkedHashMap<String, Integer>() {{
           put("M", 1000);
           put("CM", 900);
           put("D", 500);
@@ -152,11 +148,15 @@ public class CodeRepository {
           put("IV", 4);
           put("I", 1);
         }};
+
+    //zmienia liczbę arabską na liczbę rzymską
+    static String toRoman(int n) {
+        var romanB = new StringBuilder();
         
         for (String key : ROMAN_DECIMAL.keySet()) {
           while (n >= ROMAN_DECIMAL.get(key)) {
             romanB.append(key);
-            n = n - ROMAN_DECIMAL.get(key);
+            n -= ROMAN_DECIMAL.get(key);
           }
         }
         return romanB.toString();
@@ -165,28 +165,13 @@ public class CodeRepository {
     //zmienia wartość liczby rzymskiej na liczbę arabską
     static int fromRoman(String romanNumeral) {
         int romanNum = 0;
-        var ROMAN_DECIMAL = new LinkedHashMap<String, Integer>() {{
-          put("CM", 900);
-          put("M", 1000);
-          put("CD", 400);
-          put("D", 500);
-          put("XC", 90);
-          put("C", 100);
-          put("XL", 40);
-          put("L", 50);
-          put("IX", 9);
-          put("X", 10);
-          put("IV", 4);
-          put("V", 5);
-          put("I", 1);
-        }};
         
         for (String key : ROMAN_DECIMAL.keySet()) {
-          while (romanNumeral.contains(key)) {
-            romanNumeral = romanNumeral.replaceFirst(key, "");
-            romanNum = romanNum + ROMAN_DECIMAL.get(key);
-          }
-        }    
+            while (romanNumeral.startsWith(key)) {
+                romanNumeral = romanNumeral.substring(key.length());
+                romanNum += ROMAN_DECIMAL.get(key);
+            }
+        }
         return romanNum;
     }
 }
